@@ -95,7 +95,7 @@ export default [
     name: 'commodity',
     meta: {
       icon: 'md-menu',
-      title: '商品管理',
+      title: '商品管理'
     },
     component: Main,
     children: [
@@ -121,10 +121,48 @@ export default [
         path: 'commodity_list',
         name: 'commodity_list',
         meta: {
-          icon: '',
+          icon: 'md-funnel',
           title: '商品列表'
         },
         component: () => import('@/view/commodity/commodity-list.vue')
+      }
+    ]
+  },
+  {
+    path: '/mobile',
+    name: 'mobile',
+    meta: {
+      icon: 'md-menu',
+      title: '移动端管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'banner',
+        name: 'banner',
+        meta: {
+          icon: 'md-funnel',
+          title: '首页轮播图'
+        },
+        component: () => import('@/view/mobile/banner.vue')
+      },
+      {
+        path: 'floor',
+        name: 'floor',
+        meta: {
+          icon: 'md-funnel',
+          title: '首页楼层'
+        },
+        component: () => import('@/view/mobile/floor.vue')
+      },
+      {
+        path: 'floor_data',
+        name: 'floor_data',
+        meta: {
+          icon: 'md-funnel',
+          title: '楼层数据'
+        },
+        component: () => import('@/view/mobile/floor-data.vue')
       }
     ]
   },

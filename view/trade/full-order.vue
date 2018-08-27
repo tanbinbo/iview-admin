@@ -2,6 +2,14 @@
     <div>
         <Row>
             <Card>
+                <Input v-model="value13">
+                    <Select v-model="select3" slot="prepend" style="width: 80px">
+                        <Option value="day">Day</Option>
+                        <Option value="month">Month</Option>
+                    </Select>
+                    <Button slot="append" icon="ios-search" @click="search"></Button>
+                </Input>
+
                 <div class="ivu-table-box">
                     <Table :columns="columnsList" :data="dataList"></Table>
                 </div>
@@ -12,10 +20,13 @@
 </template>
 
 <script>
+import {getOrderList, searchOrderList} from '../../api/data.js'
  export default {
     name: 'full_order',
     data () {
         return {
+            value13: '',
+            select3: 'day',
             columnsList: [
                 {
                     title: '编号',
@@ -99,47 +110,30 @@
                     }
                 }
             ],
-            dataList: [
-                {   
-                    number: '201808221010843',
-                    amount: '24.00',
-                    member: 'arg0',
-                    store: '手机数码旗舰店',
-                    consignee: '收货人名称',
-                    paymentMethodName: '货到付款',
-                    shippingMethodName: '顺丰快递',
-                    status: '已付款',
-                    createdDate: '1534925492712'
-                },
-                {   
-                    number: '201808221010843',
-                    amount: '25.00',
-                    member: 'arg0',
-                    store: '手机数码旗舰店',
-                    consignee: '收货人名称',
-                    paymentMethodName: '货到付款',
-                    shippingMethodName: '顺丰快递',
-                    status: '已付款',
-                    createdDate: '1534925492700'
-                },
-                {   
-                    number: '201808221010843',
-                    amount: '26.00',
-                    member: 'arg0',
-                    store: '手机数码旗舰店',
-                    consignee: '收货人名称',
-                    paymentMethodName: '货到付款',
-                    shippingMethodName: '顺丰快递',
-                    status: '已付款',
-                    createdDate: '1534925492000'
-                }
-            ]
+            dataList: [],
+            page: 0
         }
     },
     methods: {
+        search(){
+            console.log(this.value13)
+            searchOrderList({
+                type: this.select3,
+                value: this.value13
+            }).then(res => {
+                this.dataList = res;
+            })
+        }
     },
     components: {
 
+    },
+    mounted() {
+        getOrderList().then(res => {
+            console.log(res)
+            this.dataList = res.data
+        })
+        console.log(123)
     }
  }
 </script>

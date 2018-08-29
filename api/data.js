@@ -6,3 +6,19 @@ export const getTableData = () => {
     method: 'get'
   })
 }
+
+export const getOrderList = () => {
+  return axios.request({
+    url: 'get_full_order',
+    method: 'get'
+  })
+}
+
+export const searchOrderList = (params) => {
+  return axios.request({
+    url: 'get_full_order',
+    method: 'get',
+    data: params
+  })
+}
+
